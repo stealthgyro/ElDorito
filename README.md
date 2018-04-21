@@ -1,3 +1,5 @@
+#attempting to add Dual-Wield Inversion as an option rather than forced like Halo 2 Vista
+
 <img src="http://i.imgur.com/IkTrjna.png" width="190" height="164" align="right"/>
 
 # ElDewrito
