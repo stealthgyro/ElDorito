@@ -46,6 +46,7 @@ namespace
 	auto SSL_SetVoiceChatControl = reinterpret_cast<int(__stdcall *)(int)>(0x79BB90);
 	auto SSL_SetVoiceChatVolume = reinterpret_cast<int(__stdcall *)(int, bool)>(0x79BBB0);
 	auto SSL_SetVoiceVolume = reinterpret_cast<int(__stdcall *)(int, bool)>(0x79BBE0);
+	auto SSL_SetDualWieldInversion = reinterpret_cast<int(__stdcall *)(bool)>(0x79BC00); //Not 100% on how thexe hex numbers are being chosen -Gyro
 
 	bool TryParseInt(const std::string& str, int* value);
 	bool TryParseResolutionString(const std::string& str, int* width, int* height);
@@ -209,6 +210,22 @@ namespace
 
 		std::stringstream ss;
 		ss << "Invert Look " << (statusBool ? "enabled." : "disabled.");
+		returnInfo = ss.str();
+		return true;
+	}
+
+	bool VariableSettingsInvertDualWieldInversionUpdate(const std::vector<std::string> &args, std::string &returnInfo)
+	{
+		auto value = Modules::ModuleSettings::Instance().VarDualWieldInversion->ValueInt;
+		auto statusBool = (value != 0);
+
+		if (value < 0 || value > 1)
+			return false;
+
+		SSL_SetDualWieldInversion(statusBool);
+
+		std::stringstream ss;
+		ss << "Dual-Wield Inversion " << (statusBool ? "enabled." : "disabled.");
 		returnInfo = ss.str();
 		return true;
 	}
@@ -689,6 +706,7 @@ namespace Modules
 		VarScreenResolution = AddVariableString("ScreenResolution", "resolution", "Controls the screen resolution", eCommandFlagsArchived, "default", VariableSettingsScreenResolutionUpdate);
 		VarHUDShake = AddVariableInt("HUDShake", "hud_shake", "Controls whether hud shake is enabled (1) or disabled (0)", eCommandFlagsArchived, 0, VariableSettingsHUDShakeUpdate);
 		VarInvertLook = AddVariableInt("InvertLook", "invert_look", "Controls whether look-inversion is enabled (1) or disabled (0)", eCommandFlagsArchived, 0, VariableSettingsInvertLookUpdate);
+		VarDualWieldInversion = AddVariableInt("DualWieldInversion", "dual_wield_inversion", "Controls whether dual-wield inversion is enabled (1) or disabled (0)", eCommandFlagsArchived, 0, VariableSettingsDualWieldInversionUpdate);
 		VarInvertMouse = AddVariableInt("InvertMouse", "invert_mouse", "Controls whether mouse-inversion is enabled (1) or disabled (0)", eCommandFlagsArchived, 0, VariableSettingsInvertMouseUpdate);
 		VarLightingQuality = AddVariableString("LightingQuality", "lighting", "Controls whether the lighting quality level is low, medium or high", eCommandFlagsArchived, "high", VariableSettingsLightingQualityUpdate);
 		VarLookSensitivity = AddVariableInt("LookSensitivity", "look_sensitivity", "Controls the controller look sensitivity (0 - 100)", eCommandFlagsArchived, 50, VariableSettingsLookSensitivityUpdate);

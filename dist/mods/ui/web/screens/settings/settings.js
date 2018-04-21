@@ -16,13 +16,14 @@ var playSound = true;
 
 var settingsToLoad = [
     ['sControlsMethod','Settings.Gamepad', 'Control Method', 'Keyboard or Gamepad - Choose your preference.'],
-	['sInfantryMouseSensV','Settings.MouseSensitivityVertical', 'Infantry Mouse Sensitivity Vertical', 'Adjusts the infantry mouse sensitivity on the Y-axis.'],
+    ['sInfantryMouseSensV','Settings.MouseSensitivityVertical', 'Infantry Mouse Sensitivity Vertical', 'Adjusts the infantry mouse sensitivity on the Y-axis.'],
     ['sInfantryMouseSensH','Settings.MouseSensitivityHorizontal', 'Infantry Mouse Sensitivity Horizontal', 'Adjusts the infantry mouse sensitivity on the X-axis.'],
     ['sVehicleMouseSensV','Settings.MouseSensitivityVehicleVertical', 'Vehicle Mouse Sensitivity Vertical', 'Adjusts the vehicle mouse sensitivity on the Y-axis.'],
     ['sVehicleMouseSensH','Settings.MouseSensitivityVehicleHorizontal', 'Vehicle Mouse Sensitivity Horizontal', 'Adjusts the vehicle mouse sensitivity on the X-axis.'],
     ['sMouseAcceleration','Settings.MouseAcceleration', 'Mouse Acceleration', 'Increases the speed multiplier of your mouse the faster you move it.'],
-    ['sMouseFilter','Settings.MouseFilter', 'Mouse Filter', 'Smoothes out mouse movement.'],
-    ['sInvertMouse','Settings.InvertMouse', 'Invert Mouse', 'Inverts the mouse look vertically.'],
+    ['sMouseFilter', 'Settings.MouseFilter', 'Mouse Filter', 'Smoothes out mouse movement.'],
+    ['sDualWieldInversion', 'Settings.DualWieldInversion', 'Dual-Wield Inversion', 'Swaps left/right firing when dual-wielding'],
+    ['sInvertMouse', 'Settings.InvertMouse', 'Invert Mouse', 'Inverts the mouse look vertically.'],
     ['sToggleCrouch','Settings.ToggleCrouch', 'Toggle Crouch', 'Toggles crouch on press instead of disabling on release.'],
     ['sScreenResolution','Settings.ScreenResolution', 'Screen Resolution', 'Sets the rendering resolution. Higher resolutions require more graphics processing power and video memory.'],
     ['sBrightness','Settings.Brightness', 'Brightness', 'Adjust the game\'s brightness.'],
@@ -65,7 +66,7 @@ var settingsToLoad = [
     ['vNoiseSupress','VoIP.NoiseSupress', 'Noise Suppress', 'Removes background noise from the captured signal.'],
     ['vEchoCancelation','VoIP.EchoCancelation', 'Echo Cancellation', 'Removes echo by subtracting it from the transmitted or received signal.'],
     ['vStereoVoice','VoIP.StereoVoice', 'Allow Stereo Voice', 'Enables Stereo audio from other players.'],
-	['vPTTSound','VoIP.PTTSoundEnabled', 'Enable PTT Noise', 'Play a noise when pressing the push to talk button'],
+    ['vPTTSound','VoIP.PTTSoundEnabled', 'Enable PTT Noise', 'Play a noise when pressing the push to talk button'],
     ['tAgressiveAudioDiscard', 'Tweaks.AggressiveAudioDiscarding', 'Aggressive Audio Discarding', 'Prioritizies gun sounds over others to make audio cutoff less noticeable.'], 
     ['tDisableFog', 'Tweaks.DisableReactorFog', 'Reacthor', 'Removes some of the fog on Reactor which causes FPS drops indoors.'], 
     ['tDisableWeapOutline', 'Tweaks.DisableWeaponOutline', 'Weapon Outline Removal', 'Removes outlines from weapons on the ground.'], 
@@ -691,12 +692,12 @@ function editControls(which){
 function applySettings(i){
     if(i != changeArray.length){
         dew.command(changeArray[i][0] + ' "' + changeArray[i][1] + '"', {}).then(function(){
-			i++;
-			applySettings(i);            
+            i++;
+            applySettings(i);            
         }).catch(function (error){
             console.log(error);
             i++;
-			applySettings(i);  
+            applySettings(i);  
         });
     }else{
         dew.notify("settings-update", changeArray);

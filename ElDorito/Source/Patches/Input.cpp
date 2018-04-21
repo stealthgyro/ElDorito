@@ -605,9 +605,10 @@ namespace
 		auto bindings = moduleInput.GetBindings();
 
 		auto isDualWielding = IsDualWielding();
+		//auto isDualWieldInversion = *(bool*)0x########; //hex?... it's set in the ModuleSettings.cpp with 0x79BC00 ?
 		auto isUsingController = *(bool*)0x0244DE98;
 
-		if (!isUsingController && isDualWielding)
+		if (!isUsingController && isDualWielding/* && isDualWieldInversion*/)// commented out while I look into this. - Gyro
 		{
 			auto fireLeftAction = GetActionState(eGameActionFireLeft);
 			auto fireRightAction = GetActionState(eGameActionFireRight);

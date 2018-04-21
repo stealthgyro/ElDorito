@@ -99,6 +99,7 @@ namespace
 		uint32_t MouseSensitivityVehicleHorizontal;
 		uint32_t MouseAcceleration;
 		uint8_t MouseFilter;
+		uint8_t DualWieldInversion;
 		uint8_t InvertMouse;
 		uint8_t Unknown41C8E;
 		uint8_t Unknown41C8F;
@@ -386,6 +387,7 @@ namespace
 		preferences->MouseSensitivityVehicleVertical = moduleSettings.VarMouseSensitivityVehicleVertical->ValueInt;
 		preferences->MouseAcceleration = moduleSettings.VarMouseAcceleration->ValueInt;
 		preferences->MouseFilter = uint8_t(moduleSettings.VarMouseFilter->ValueInt);
+		preferences->DualWieldInversion = uint8_t(moduleSettings.VarDualWieldInversion->ValueInt);
 		preferences->InvertMouse = uint8_t(moduleSettings.VarInvertMouse->ValueInt);
 
 		preferences->Unknown00 = 1;

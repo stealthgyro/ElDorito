@@ -17,6 +17,8 @@ namespace Modules
 		Command *VarFullscreen;
 		Command *VarScreenResolution;
 		Command *VarHUDShake;
+		Command *VarDualWieldInversion;
+		Command *VarInvertLook;
 		Command *VarInvertLook;
 		Command *VarInvertMouse;
 		Command *VarLightingQuality;
